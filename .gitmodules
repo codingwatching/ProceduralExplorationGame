@@ -4,3 +4,6 @@
 [submodule "tools/SceneEditor/editorGUIFramework"]
 	path = tools/SceneEditor/editorGUIFramework
 	url = https://github.com/OtherMythos/EditorGUIFramework
+[submodule "plugins/avDialogPlugin"]
+	path = plugins/avDialogPlugin
+	url = https://github.com/OtherMythos/avEngineDialog

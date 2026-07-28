@@ -163,6 +163,13 @@
         _doFile("res://src/System/Dialog/DialogMetaScanner.nut");
         mDialogManager = DialogManager();
 
+        //Dialog is a plugin now, so these come from the project rather than the DialogScript and
+        //DialogConstants keys the engine used to read out of avSetup.cfg.
+        _dialogSystem.setImplementation("res://src/DialogScript.nut");
+        _dialogSystem.setConstants({
+            dialogInformation = 100
+        });
+
         _doFile("res://src/System/Quest/QuestManager.nut");
         _doFile("res://src/System/Quest/Quest.nut");
         mQuestManager = QuestManager();
