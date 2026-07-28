@@ -892,7 +892,6 @@ namespace ProceduralExplorationGamePlugin{
         }else{
             assert(false);
         }
-        item->setListener(AV::SceneNamespace::getMovableObjectListener(AV::MovableObjectType::Item));
 
         AV::MovableObjectUserData::movableObjectToUserData(vm, (Ogre::MovableObject*)item, AV::MovableObjectType::Item);
 
