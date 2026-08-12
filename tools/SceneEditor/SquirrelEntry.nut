@@ -24,7 +24,6 @@ function start(){
     _gui.setCanvasSize(_window.getSize(), _window.getActualSize());
 
     _doFile("res://editorGUIFramework/src/EditorGUIFramework.nut");
-    _doFile("res://sceneEditorFramework/SceneEditorFramework.nut");
     _gui.setDefaultFontSize26d6((_gui.getOriginalDefaultFontSize26d6()).tointeger());
 
     _doFile("res://SceneEditorFPSCamera.nut");
