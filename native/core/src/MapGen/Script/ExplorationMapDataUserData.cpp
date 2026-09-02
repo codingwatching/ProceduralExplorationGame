@@ -15,6 +15,8 @@
 
 namespace ProceduralExplorationGameCore{
 
+    AV::ScriptObjectTypeTag ExplorationMapDataTypeTag;
+
     SQObject ExplorationMapDataUserData::ExplorationMapDataDelegateTableObject;
     SQObject ExplorationMapDataUserData::ExplorationMapDataDelegateTableObjectMapGenVM;
 
@@ -37,14 +39,14 @@ namespace ProceduralExplorationGameCore{
 
         sq_pushobject(vm, *tableObj);
         sq_setdelegate(vm, -2); //This pops the pushed table
-        sq_settypetag(vm, -1, ExplorationMapDataTypeTag);
+        sq_settypetag(vm, -1, ExplorationMapDataTypeTag.get());
         //sq_setreleasehook(vm, -1, ExplorationMapDataObjectReleaseHook);
     }
 
     AV::UserDataGetResult ExplorationMapDataUserData::readExplorationMapDataFromUserData(HSQUIRRELVM vm, SQInteger stackInx, ExplorationMapData** outData){
         SQUserPointer pointer, typeTag;
         if(SQ_FAILED(sq_getuserdata(vm, stackInx, &pointer, &typeTag))) return AV::USER_DATA_GET_INCORRECT_TYPE;
-        if(typeTag != ExplorationMapDataTypeTag){
+        if(typeTag != ExplorationMapDataTypeTag.get()){
             *outData = 0;
             return AV::USER_DATA_GET_TYPE_MISMATCH;
         }

@@ -16,6 +16,8 @@
 
 namespace ProceduralExplorationGamePlugin{
 
+    AV::ScriptObjectTypeTag DataPointFileTypeTag;
+
     SQObject DataPointFileParserUserData::DataPointFileDelegateTableObject;
 
     void DataPointFileParserUserData::dataPointFileHandlerToUserData(HSQUIRRELVM vm, WrappedDataPointFile* data){
@@ -24,14 +26,14 @@ namespace ProceduralExplorationGamePlugin{
 
         sq_pushobject(vm, DataPointFileDelegateTableObject);
         sq_setdelegate(vm, -2); //This pops the pushed table
-        sq_settypetag(vm, -1, DataPointFileTypeTag);
+        sq_settypetag(vm, -1, DataPointFileTypeTag.get());
         sq_setreleasehook(vm, -1, DataPointFileHandlerReleaseHook);
     }
 
     AV::UserDataGetResult DataPointFileParserUserData::readDataPointFileHandlerFromUserData(HSQUIRRELVM vm, SQInteger stackInx, WrappedDataPointFile** outData){
         SQUserPointer pointer, typeTag;
         if(SQ_FAILED(sq_getuserdata(vm, stackInx, &pointer, &typeTag))) return AV::USER_DATA_GET_INCORRECT_TYPE;
-        if(typeTag != DataPointFileTypeTag){
+        if(typeTag != DataPointFileTypeTag.get()){
             *outData = 0;
             return AV::USER_DATA_GET_TYPE_MISMATCH;
         }

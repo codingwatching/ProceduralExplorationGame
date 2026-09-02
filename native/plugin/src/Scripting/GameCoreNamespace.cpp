@@ -953,7 +953,7 @@ namespace ProceduralExplorationGamePlugin{
     }
 
     SQInteger GameCoreNamespace::insertParsedSceneFileVoxMeshGetAnimInfo(HSQUIRRELVM vm){
-        AV::ParsedSceneFile* file = 0;
+        AV::ParsedSceneFilePtr file;
         AV::ParsedAvSceneUserData::readSceneObjectFromUserData(vm, 2, &file);
 
         AV::CollisionWorldObject* collisionWorld;
@@ -971,7 +971,7 @@ namespace ProceduralExplorationGamePlugin{
         }
 
         ProceduralExplorationGameCore::VoxMeshSceneDataInserter inserter(sceneManager, detectionWorld, offset);
-        AV::AnimationInfoBlockPtr animData = inserter.insertSceneDataGetAnimInfo(file, node);
+        AV::AnimationInfoBlockPtr animData = inserter.insertSceneDataGetAnimInfo(file.get(), node);
         if(!animData){
             sq_pushnull(vm);
             return 1;
@@ -982,7 +982,7 @@ namespace ProceduralExplorationGamePlugin{
     }
 
     SQInteger GameCoreNamespace::insertParsedSceneFileVoxMeshGetAnimInfoOverworld(HSQUIRRELVM vm){
-        AV::ParsedSceneFile* file = 0;
+        AV::ParsedSceneFilePtr file;
         AV::ParsedAvSceneUserData::readSceneObjectFromUserData(vm, 2, &file);
 
         Ogre::SceneNode* node = 0;
@@ -997,7 +997,7 @@ namespace ProceduralExplorationGamePlugin{
         }
 
         ProceduralExplorationGameCore::OverworldVoxMeshSceneDataInserter inserter(sceneManager);
-        AV::AnimationInfoBlockPtr animData = inserter.insertSceneDataGetAnimInfo(file, node);
+        AV::AnimationInfoBlockPtr animData = inserter.insertSceneDataGetAnimInfo(file.get(), node);
 
         const std::map<int,Ogre::SceneNode*>& values = inserter.getRegionNodes();
         sq_newtable(vm);

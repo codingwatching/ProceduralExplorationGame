@@ -5,6 +5,8 @@
 
 namespace ProceduralExplorationGamePlugin{
 
+    AV::ScriptObjectTypeTag MeshParticleEmitterTypeTag;
+
     SQObject MeshParticleEmitterUserData::MeshParticleEmitterDelegateTableObject;
 
     void MeshParticleEmitterUserData::meshParticleEmitterToUserData(HSQUIRRELVM vm, ProceduralExplorationGameCore::MeshParticleEmitter* emitter){
@@ -13,14 +15,14 @@ namespace ProceduralExplorationGamePlugin{
 
         sq_pushobject(vm, MeshParticleEmitterDelegateTableObject);
         sq_setdelegate(vm, -2);
-        sq_settypetag(vm, -1, MeshParticleEmitterTypeTag);
+        sq_settypetag(vm, -1, MeshParticleEmitterTypeTag.get());
         sq_setreleasehook(vm, -1, meshParticleEmitterObjectReleaseHook);
     }
 
     AV::UserDataGetResult MeshParticleEmitterUserData::readMeshParticleEmitterFromUserData(HSQUIRRELVM vm, SQInteger stackInx, ProceduralExplorationGameCore::MeshParticleEmitter** outEmitter){
         SQUserPointer pointer, typeTag;
         if(SQ_FAILED(sq_getuserdata(vm, stackInx, &pointer, &typeTag))) return AV::USER_DATA_GET_INCORRECT_TYPE;
-        if(typeTag != MeshParticleEmitterTypeTag){
+        if(typeTag != MeshParticleEmitterTypeTag.get()){
             *outEmitter = 0;
             return AV::USER_DATA_GET_TYPE_MISMATCH;
         }

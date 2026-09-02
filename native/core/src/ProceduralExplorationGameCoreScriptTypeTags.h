@@ -4,6 +4,6 @@
 
 namespace ProceduralExplorationGameCore{
 
-    static void* ExplorationMapDataTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 10);
+    extern AV::ScriptObjectTypeTag ExplorationMapDataTypeTag;
 
 };

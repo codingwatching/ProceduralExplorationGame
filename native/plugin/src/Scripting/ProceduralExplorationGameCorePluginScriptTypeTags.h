@@ -4,10 +4,10 @@
 
 namespace ProceduralExplorationGamePlugin{
 
-    //static void* ExplorationMapDataTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 1);
-    static void* VisitedPlaceMapDataTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 2);
-    static void* DataPointFileTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 3);
-    static void* MapGenDataContainerUserDataTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 4);
-    static void* MeshParticleEmitterTypeTag = reinterpret_cast<void*>(AV::CUSTOM_TYPE_TAGS + 5);
+    //The engine assigns the backing integers on first use, so each tag is defined in
+    //exactly one translation unit. @see AV::ScriptObjectTypeTag
+    extern AV::ScriptObjectTypeTag VisitedPlaceMapDataTypeTag;
+    extern AV::ScriptObjectTypeTag DataPointFileTypeTag;
+    extern AV::ScriptObjectTypeTag MeshParticleEmitterTypeTag;
 
 };
